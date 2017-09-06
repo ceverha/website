@@ -1,0 +1,170 @@
+<html>
+<head>
+<title>CEO Fantasy Draft</title>
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<h1>Fantasy Draft</h1>
+<style>
+	table {
+		border: 1px solid black;
+		border-collapse: collapse;
+		padding-top: 2px;
+		padding-bottom: 2px;
+		padding-left: 10px;
+		padding-right: 10px;
+	}
+</style>
+</head>
+<body>
+<div id="instructions">
+	<h3>What is a Fantasy Draft?</h3>
+	Similar to sports, a fantasy league helps add excitement and tests the knowledge of each player's skill level. For a tournament, each person drafts players that they believe will do the best in the given tournament. The person will be given a certain number of points depending on how well the player performs. The team with the most points wins the fantasy draft.
+	<h3>Prize Distribution</h3>
+	If you are playing for $$, typically I give out 70% for 1st and 30% for 2nd.
+	<h3>How to Play</h3>
+	Gather a group of fellow Smash Enthusiasts, wager a little money ($10-20) to keep it entertaining and start a draft pool!
+	<h3>Draft Order</h3>
+	The order of a draft is snake style. A player who gets the 1st pick of a particular round will be the last one to pick in the following round.
+	<br/>For Example: (4 person draft).
+	<br/>Round 1	Player A chooses M2K first. 
+	<br/>Player B chooses Mang0 second.
+	<br/>Player C chooses Dr. PeePee third.
+	<br/>Player D chooses HungryBox fourth.
+	<br/>Since Player D chose last, he will choose first in the next round.
+	<br/>Player D chooses Shroomed 5th, Player C chooses Hax 6th and so on.
+	<h3>Choosing a Draft Order</h3>
+	There are some inherit advantages to picking in a particular spot, so to ensure that there is a fair system in place, you can bid for the preferred spot in the auction at the expense of losing points in the end. For example, I bid 36 points for 1st Pick. Peter bids 40 pts. As a result, Peter wins the 1st pick, but will lose 40 pts in his final point total. You can decide how to determine this, but typically doing an auction for each pick is the fairest as it ensures that everyone had a chance to get whatever pick they wanted.Otherwise, you can keep it random.
+	<h3>Drafting</h3>
+	Once the pick order is done, you can begin drafting. The 1st pick should pick his player and then contact/poke the next player in line to make their pick. This process should be done for 8-10 rounds (depending on the # of relevant notable players entering the tournament). It also helps to keep a list of notable players for everyone to share, once a player has been picked, you should cross him off the list.
+	<h3>Scoring</h3>
+	Once the tournament is finished, note the placements of each of the players and calculate your final score. The team with the most points wins.
+	<h3>Example</h3>
+	<table id="example">
+		<tr>
+			<td><b>Placing</b></td><td><b>Points</b></td><td><b>Eliminated</b></td>
+		</tr>
+		<tr>
+			<td>1st</td><td>450</td><td></td>
+		</tr>
+		<tr>
+			<td>2nd</td><td>430</td><td>GF</td>
+		</tr>
+		<tr>
+			<td>3rd</td><td>400</td><td>LF</td>
+		</tr>
+		<tr>
+			<td>4th</td><td>380</td><td>LSF</td>
+		</tr>
+		<tr>
+			<td>5th</td><td>360</td><td>LQF</td>
+		</tr>
+		<tr>
+			<td>7th</td><td>340</td><td>Start of Top 8</td>
+		</tr>
+		<tr>
+			<td>9th</td><td>320</td><td>End of Semis</td>
+		</tr>
+		<tr>
+			<td>13th</td><td>300</td><td>Start of Semis</td>
+		</tr>
+		<tr>
+			<td>17th</td><td>270</td><td>End of Quarters</td>
+		</tr>
+		<tr>
+			<td>25th</td><td>240</td><td>Start of Quarters</td>
+		</tr>
+		<tr>
+			<td>33rd</td><td>210</td><td>Lost in Bracket</td>
+		</tr>
+		<tr>
+			<td>49th</td><td>180</td><td>Lost in Bracket</td>
+		</tr>
+		<tr>
+			<td>65th</td><td>150</td><td>Lost in Bracket/Pools</td>
+		</tr>
+		<tr>
+			<td>97th</td><td>120</td><td>Lost in Bracket/Pools</td>
+		</tr>
+		<tr>
+			<td>129th</td><td>90</td><td>Lost in Bracket/Pools</td>
+		</tr>
+		<tr>
+			<td>Worse</td><td>0</td><td>Lost in Bracket/Pools</td>
+		</tr>
+	</table>
+	<br/><b>Note from Jack - </b>We can deliberate on the specifics if we want, such as how many players on each team or the point totals.
+	<br/>
+</div>
+<h1>CEO Registered Attendees</h1>
+<div id="playerlist"></div>
+
+<script>
+$(document).ready(function(){
+	$.ajax({
+		type: "GET",
+		url: "ceomeleeplayers.txt",
+		dataType: "text",
+		success: function(data){
+			process(data);
+		}
+	});
+	// Data processing and display method
+	function process(data){
+		$("#playerlist").html("");
+		
+		var playersraw = data.split("\n");
+		// Trim the array to remove empty strings
+		for (var i = playersraw.length - 1; i >= 0; i--){
+			if (playersraw[i] == ""){
+				playersraw.splice(i,1);
+			}
+		}
+		
+		var currChar = '';
+		var nextChar = '';
+		var currAlphaArray = 0;
+		
+		var playersoverall = [];
+		var newAlpha = [];
+		playersoverall.push(newAlpha);
+
+		for (var i = 0; i < playersraw.length; i++){
+			if (i == 0){
+				currChar = playersraw[0].charAt(0).toLowerCase();
+			}
+			nextChar = playersraw[i].charAt(0).toLowerCase();
+			//console.log("Curr: " + currChar + " New: " + nextChar);
+			if (currChar != nextChar){
+				//console.log("ahh\n");
+				currChar = nextChar;
+				var newAlpha = [];
+				playersoverall.push(newAlpha);
+				currAlphaArray++;
+			}
+			playersoverall[currAlphaArray].push(playersraw[i]);
+
+		}
+		console.log(playersoverall);
+
+		$("#playerlist").append("<br/>");
+		for (var i = 0; i < playersoverall.length; i++){
+			$("#playerlist").append("<table class = \"players\">");
+			var width = 0;
+			$("#playerlist").append("<tr>");
+			for (var j = 0; j < playersoverall[i].length; j++){
+				$("#playerlist").append("<td style=\"padding: 5px\">" + playersoverall[i][j] + "</td>");
+				width ++;
+				if (width >= 6){
+					$("#playerlist").append("</tr><tr>");
+					width = 0;
+				}
+			}
+			$("#playerlist").append("</tr>");
+			$("#playerlist").append("</table>");
+			$("#playerlist").append("<br/><br/>");
+		}
+
+	}
+});
+</script>
+</body>
+</html>

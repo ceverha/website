@@ -1,0 +1,130 @@
+@import url(https://fonts.googleapis.com/css?family=Raleway);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300);
+
+html{
+	font-size: 20px;
+	height: 100%;
+}
+
+footer .icon{
+	margin-right: 0.5rem;
+}
+
+.icon{
+	width: 2rem;
+	height: 2rem;
+	transition: width 0.25s ease;
+	transition: height 0.25s ease;
+}
+.icon:hover{
+	width: 2.3rem;
+	height: 2.3rem;
+	transition: width 0.25s ease;
+	transition: height 0.25s ease;
+}
+
+#background {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	left: 0px;
+	top: 0px;
+	z-index: -1;
+}
+#overlayBody {
+	color: white;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	left: 0px;
+	top: 0px;
+}
+
+#content{
+	width: 100%;
+	min-height: 10%;
+	padding: 3rem 0;
+	
+	font-family: 'Open Sans Condensed', 'sans-serif';
+	/* scale based on the root unit (which in this case is html */
+	font-size: 1rem;
+	font-weight: 400;
+	color: #ddd;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+section.main {
+	/* relatively new CSS standard - flexible container that makes it 
+	  easier to center */
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: 4rem;
+}
+
+.name-section .name,
+.name-section .tagline{
+	display:flex;
+	justify-content: center;
+}
+
+div.name{
+	font-size: 3rem;
+	font-family: 'Raleway', 'sans-serif';
+}
+
+div.tagline{
+	font-family: 'Open Sans Condensed', 'sans-serif';
+	font-size: 1.5rem;
+}
+
+header{
+	margin-bottom: 4rem;
+	text-transform: uppercase;
+}
+ul{
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+
+}
+ul li{
+	display:inline-block;
+	margin-right:1rem;
+	transition: color 0.25s ease;
+	transition: font-size 0.25s ease;
+}
+ul li:hover{
+	font-size: 1.2rem;
+	color:#fff;
+	transition: color 0.25s ease;
+	transition: font-size 0.25s ease;
+}
+
+#hidden{
+	font-size: 1.1rem;
+	width:25rem;
+}
+#bio{
+	float: left;
+	max-width: 15rem;
+}
+#headshot{
+	width: 119px;
+	height: 216px;
+	border-radius: 1rem;
+	margin-left: 2rem;
+	float: left;
+}
+#contactinfo{
+	clear: left;
+	width: 9rem;
+	margin: auto;
+	
+	padding-top: 3rem;
+	color: #81e0e3;
+}
