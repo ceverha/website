@@ -10,7 +10,7 @@ class Entity {
 	}
 }
 
-const frameRate = 35;
+const frameRate = 30;
 $(document).ready(() => {
 	// inititiate random size and x/y speed values
 	// set interval to start moving then around
@@ -43,6 +43,15 @@ $(document).ready(() => {
 		document.getElementById("buttoninfo").style.color = "#81e0e3";
 	}
 	document.getElementById("resume").onmouseout = function(){
+		document.getElementById("buttoninfo").innerHTML = "";
+	}
+
+	// resume icon
+	document.getElementById("shiraz").onmouseover = function(){
+		document.getElementById("buttoninfo").innerHTML = "Shiraz";
+		document.getElementById("buttoninfo").style.color = "#f0e130";
+	}
+	document.getElementById("shiraz").onmouseout = function(){
 		document.getElementById("buttoninfo").innerHTML = "";
 	}
 	
@@ -106,7 +115,7 @@ function drawEntities(entities, drawContext, width, height){
 	for (let i = 0; i < entities.length; i++) {
 		entities[i] = updateLocation(entities[i], width, height);
 		if (entities[i].display) {
-			drawContext.globalAlpha = 0.15;
+			drawContext.globalAlpha = 0.10;
 			drawContext.fillStyle = entities[i].color;
 			// drawContext.fillRect(entities[i].xPos, entities[i].yPos, entities[i].radius, entities[i].radius);
 			drawContext.beginPath();
